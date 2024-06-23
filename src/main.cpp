@@ -1,6 +1,7 @@
 #include <iostream>
 #include <memory>
 
+#include <glad/gl.h>
 #include <GLFW/glfw3.h>
 
 struct Window
@@ -34,16 +35,19 @@ int main(int argc, char* argv[])
 	if (glfwInit() != GLFW_TRUE)
 		perror("Error with glfw lol");
 
-	printf("%s\n", "Hello World!");
-
-	winptr window = std::make_shared<Window>(1920, 1080);
+	winptr window = std::make_shared<Window>(1200, 800);
 	createWindow(window->width, window->height, window);
+	glfwMakeContextCurrent(static_cast<GLFWwindow*>(window->hwnd));
+
+	int version = gladloadGL((GLADloadfunc)glfwGetProcAddress);
 
 	// this is your render loop
 	while (!canCloseWindow(window))
 	{
+		glfwSwapBuffers(static_cast<GLFWwindow*>(window->hwnd));
 		glfwPollEvents();
 	}
 
+	destroyWindow(window);
 	glfwTerminate();
 }
