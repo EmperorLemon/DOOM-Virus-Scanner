@@ -35,17 +35,21 @@ int main(int argc, char* argv[])
 	if (glfwInit() != GLFW_TRUE)
 		perror("Error with glfw lol");
 
+	glfwWindowHint(GLFW_CONTEXT_VERSION_MAJOR, 3);
+	glfwWindowHint(GLFW_CONTEXT_VERSION_MINOR, 2);
+	glfwWindowHint(GLFW_OPENGL_PROFILE, GLFW_OPENGL_CORE_PROFILE);
+
 	winptr window = std::make_shared<Window>(1200, 800);
 	createWindow(window->width, window->height, window);
 	glfwMakeContextCurrent(static_cast<GLFWwindow*>(window->hwnd));
 
-	int version = gladloadGL((GLADloadfunc)glfwGetProcAddress);
+	int version = gladLoadGL(glfwGetProcAddress);
 
 	// this is your render loop
 	while (!canCloseWindow(window))
 	{
-		glfwSwapBuffers(static_cast<GLFWwindow*>(window->hwnd));
 		glfwPollEvents();
+		glfwSwapBuffers(static_cast<GLFWwindow*>(window->hwnd));
 	}
 
 	destroyWindow(window);
