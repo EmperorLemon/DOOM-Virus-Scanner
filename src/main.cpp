@@ -39,6 +39,7 @@ int main(int argc, char* argv[])
 	winptr window = std::make_shared<Window>(1920, 1080);
 	createWindow(window->width, window->height, window);
 
+	// this is your render loop
 	while (!canCloseWindow(window))
 	{
 		glfwPollEvents();
