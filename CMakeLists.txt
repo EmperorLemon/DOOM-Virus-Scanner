@@ -14,4 +14,8 @@ add_subdirectory(lib)
 
 target_include_directories(${PROJECT_NAME} PUBLIC ${CMAKE_CURRENT_SOURCE_DIR}/src)
 
+target_link_libraries(${PROJECT_NAME} PUBLIC
+	glfw
+)
+
 add_definitions(-D_SILENCE_STDEXT_ARR_ITERS_DEPRECATION_WARNING)
